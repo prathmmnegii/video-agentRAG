@@ -6,8 +6,8 @@ DOWNLOAD_DIR = 'downloades'
 os.makedirs(DOWNLOAD_DIR,exist_ok = True)
 
 def download_youtube_audio(url :str) ->str:
-    output_path = os.path.join(DOWNLOAD_DIR, "%(title)s.%(ext)s")
-    ydl_opts = {
+    output_path = os.path.join(DOWNLOAD_DIR, "%(title)s.%(ext)s") # title, extens -> .wav file 
+    ydl_opts = {  # audio configurations
         "format": "bestaudio/best",
         "outtmpl": output_path,
         "postprocessors": [
@@ -17,7 +17,7 @@ def download_youtube_audio(url :str) ->str:
                 "preferredquality": "192",
             }
         ],
-        "quiet": True,
+        "quiet": True,  # supress all the download processes 
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(url, download=True)
